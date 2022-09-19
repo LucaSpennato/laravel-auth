@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('admin.home');
-});
+// Route::get('/home', function () {
+//     return view('admin.home');
+// });
 
 
 
@@ -39,7 +39,7 @@ Route::middleware('auth')
     ->prefix('admin')
     // ? raggruppa le varie rotte
     ->group(function(){
-        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/home', 'HomeController@index')->name('home');
         Route::resource('/posts', 'PostController');
     });
 

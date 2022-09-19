@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BoolPress') }} @yield('title') </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -33,9 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @guest()
+                        @guest
+                        @else
                             <li class="nav-item">
-                                <a href="{{ route('admin.posts.index') }}">Tutti i post</a>
+                                <a href="{{ route('admin.posts.index') }}">Posts</a>
                             </li>
                         @endguest
                     </ul>
