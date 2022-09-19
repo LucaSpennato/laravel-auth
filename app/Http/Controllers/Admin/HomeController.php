@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// ? Prendiamo i dati dell'utente loggato
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     // ! E' possibile utilizzare questo codice per l'autentifizaione, oppure andare nelle rotte
@@ -26,6 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // ? Prendiamo i dati dell'utente loggato
+        $user = Auth::user();
+        $id = Auth::id();
+        return view('admin.home', compact('id', 'user'));
     }
 }

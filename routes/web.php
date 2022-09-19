@@ -23,13 +23,18 @@ Auth::routes();
 //  * Route::middleware('auth')->get('/home', 'Admin\HomeController@index')->name('home');
 
 // ? è possibile anche unire le rotte in questo modo: 
-
+// ? proteggo tutte le rotte con il middleware, se provo ad accedere da non loggato verrò portato al login!
 Route::middleware('auth')
+    // ? aggiorna le cartelle all'interno della quale si trovano i controller 
     ->namespace('Admin')
+    // ? aggiorna i name delle sottorotte con il prefisso admin.
     ->name('admin.')
+    // ? aggiorna ogni url con il prefisso /admin
     ->prefix('admin')
+    // ? raggruppa le varie rotte
     ->group(function(){
         Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('/posts', 'PostController');
     });
 
 
