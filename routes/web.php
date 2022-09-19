@@ -19,4 +19,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// ! E' possibile usare l'auth anche dalle rotte in questo modo, vedi anche in HomeController!
+//  * Route::middleware('auth')->get('/home', 'Admin\HomeController@index')->name('home');
+
+// ? è possibile anche unire le rotte in questo modo: 
+
+Route::middleware('auth')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function(){
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+
+
