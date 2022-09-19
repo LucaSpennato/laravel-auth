@@ -21,8 +21,8 @@
                             <tr>
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>{{ $post->author }}</td>
-                                <td>{{ $post->title }} - $</td>
-                                <td>{{ $post->date }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->post_date }}</td>
                                 <td>
                                     <a href="" class="btn btn-primary">Edit</a>
                                     <a href="" class="btn btn-danger">Delete</a>
