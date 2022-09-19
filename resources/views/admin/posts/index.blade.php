@@ -23,15 +23,15 @@
                             <tr>
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>
-                                    <a href="{{ route('admin.posts.show', $post->id) }}">
+                                    <a href="{{ route('admin.posts.show', $post->slug) }}">
                                         {{ $post->author }}
                                     </a>
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
-                                    <a href="" class="btn btn-primary">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
+                                    <a href="#" class="btn btn-primary">Edit</a>
+                                    <a href="#" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @empty
