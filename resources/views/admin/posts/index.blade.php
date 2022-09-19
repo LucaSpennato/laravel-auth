@@ -22,7 +22,11 @@
                         
                             <tr>
                                 <th scope="row">{{ $post->id }}</th>
-                                <td>{{ $post->author }}</td>
+                                <td>
+                                    <a href="{{ route('admin.posts.show', $post->id) }}">
+                                        {{ $post->author }}
+                                    </a>
+                                </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
