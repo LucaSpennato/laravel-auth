@@ -36,7 +36,13 @@
                         @guest
                         @else
                             <li class="nav-item">
-                                <a href="{{ route('admin.posts.index') }}">Posts</a>
+                                {{-- ! request()->routeIs('stuff.index') ? 'some class' aggiunge una classe se siamo su quella rotta esatta! --}}
+                                <a class="nav-link {{ request()->routeIs('admin.posts.index') ? 'active text-primary' : '' }}" 
+                                href="{{ route('admin.posts.index') }}">All posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.posts.create') ? 'active text-primary' : '' }}"  
+                                href="{{ route('admin.posts.create') }}">New post</a>
                             </li>
                         @endguest
                     </ul>
