@@ -52,7 +52,7 @@
                         </h5>
                         @endforelse
                         </tbody>
-                    </table>
+                </table>
 
             </div>
         </div>

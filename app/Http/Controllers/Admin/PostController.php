@@ -40,6 +40,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $newData = $request->all();
+
+        $validateData = $request->validate();
+
         $newPost = new Post();
 
         // ? aggiorno lo slug
@@ -118,4 +121,5 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.index')->with('status-change', $delPost->title  . ' ' . 'è stata eliminata con successo')->with(['class' => 'alert-danger']);
     }
+
 }
