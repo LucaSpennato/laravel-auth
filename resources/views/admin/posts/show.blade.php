@@ -33,7 +33,7 @@
                             {{ $post->slug }}
                         </p>
                         <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
                             <a href="#" class="btn btn-danger">Delete</a>
                         </div>
                     </div>

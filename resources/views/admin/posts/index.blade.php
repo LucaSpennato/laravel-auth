@@ -31,7 +31,12 @@
                                 <td>{{ $post->post_date }}</td>
                                 <td>
                                     <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
-                                    <a href="#" class="btn btn-danger">Delete</a>
+
+                                    <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post" class="d-inline">
+                                        @csrf 
+                                        @method('DELETE')
+                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                    </form>
                                 </td>
                             </tr>
                         @empty
