@@ -7,6 +7,12 @@
     <main>
         <div class="container">
             <div class="row">
+                @if (session('session-change'))
+                    <div class="col-12 alert {{ session('class') }}">
+                        {{ session('session-change') }}
+                    </div>
+                @endif
+
                 <div class="card m-auto mt-5 p-1" style="width: 18rem;">
                     <img src="{{ $post->post_image }}" class="card-img-top" alt="{{ $post->title }}'s image">
                     <div class="card-body">

@@ -42,7 +42,7 @@ class PostController extends Controller
         $newData = $request->all();
         $newPost = new Post();
 
-        // ? aggirono lo slug
+        // ? aggiorno lo slug
         $lastPostId = (Post::orderBy('id', 'desc')->first()->id) +1;
         $newData['slug'] = Str::slug($newData['title'] . '' . $lastPostId, '-');
         $newData['post_date'] = new DateTime();
@@ -50,7 +50,8 @@ class PostController extends Controller
         $newPost->create($newData);
 
         // ? mi faccio redirezionare nella show del nuovo post usando lo slug che arriva con upData!
-        return redirect()->route('admin.posts.show', $newData['slug']);
+        return redirect()->route('admin.posts.show', $newData['slug'])->with('session-change', $newData['title'] . ' ' . 'è stata aggiunta con successo!')
+        ->with(['class' => 'alert-success']);
     }
 
     /**
@@ -79,7 +80,6 @@ class PostController extends Controller
     {
         // ? Dall'index mi passo lo slug, qui in edit becco il post cercandolo nel DB e lo salvo in variabile
         $post = Post::where('slug', $slug)->first();
-        // dd($post);
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -100,7 +100,8 @@ class PostController extends Controller
 
         $upPost->update($upData);
 
-        return redirect()->route('admin.posts.show', $upData['slug']);
+        return redirect()->route('admin.posts.show', $upData['slug'])->with('session-change', $upData['title'] . ' ' . 'è stata modificata con successo!')
+        ->with(['class' => 'alert-warning']);
     }
 
     /**
@@ -115,6 +116,6 @@ class PostController extends Controller
 
         $delPost->delete();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('status-change', $delPost->title  . ' ' . 'è stata eliminata con successo')->with(['class' => 'alert-danger']);
     }
 }

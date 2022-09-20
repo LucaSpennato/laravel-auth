@@ -6,6 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+
+                @if (session('status-change'))
+                    <div class="alert {{ session('class') }}">
+                        {{ session('status-change') }}
+                    </div>
+                @endif
+
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
