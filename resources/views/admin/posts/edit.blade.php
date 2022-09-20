@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.posts.update') }}" method="post">
+                    <form action="{{ route('admin.posts.update', $post->slug) }}" method="post">
                         @csrf
                         @method('put')
                         @include('admin.posts.includes.form')

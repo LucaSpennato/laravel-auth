@@ -30,7 +30,7 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
                                     <a href="#" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

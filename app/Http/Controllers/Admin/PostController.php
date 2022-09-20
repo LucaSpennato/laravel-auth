@@ -47,9 +47,9 @@ class PostController extends Controller
         $newData['slug'] = Str::slug($newData['title'] . '' . $lastPostId, '-');
         $newData['post_date'] = new DateTime();
 
-
         $newPost->create($newData);
 
+        // ? mi faccio redirezionare nella show del nuovo post usando lo slug che arriva con upData!
         return redirect()->route('admin.posts.show', $newData['slug']);
     }
 
@@ -75,9 +75,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        
+        // ? Dall'index mi passo lo slug, qui in edit becco il post cercandolo nel DB e lo salvo in variabile
+        $post = Post::where('slug', $slug)->first();
+        // dd($post);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
