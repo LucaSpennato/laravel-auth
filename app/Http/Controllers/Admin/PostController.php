@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Admin\Post;
 use App\Http\Controllers\Controller;
 use DateTime;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -41,7 +42,17 @@ class PostController extends Controller
     {
         $newData = $request->all();
 
-        $validateData = $request->validate();
+        $validateData = $request->validate(
+            [
+                'title' => 'required|min:2|max:100',
+                'author' => 'required|min:5|max:50',
+                'post_image' => 'required|active_url|max:21844',
+                'post_content' => 'required|min:10|max:21844',
+            ],
+            [
+                'post_image.active_url' => 'The image must be an active_url',
+            ],
+        );
 
         $newPost = new Post();
 
@@ -96,6 +107,27 @@ class PostController extends Controller
     public function update(Request $request, $slug)
     {
         $upData = $request->all();
+
+        $validateData = $request->validate(
+            [
+                'title' => [
+                    'required',
+                     'min:2', 
+                     'max:100',
+                    // FIXME Non funzia unique!
+                    // Se il dato è unico, permette di inviare lo stesso, il problema nell'update avviene quando non viene modificato il titolo
+                    // essendo già presente, senza questa regola non verrà aggiornato
+                    // Rule::unique('posts')->ignore($upData['title'], 'title'),
+                    ],
+                    'author' => 'required|min:5|max:50',
+                    'post_image' => 'required|active_url|max:21844',
+                    'post_content' => 'required|min:10|max:21844',
+            ],
+            [
+                'post_image.active_url' => 'The image must be an active_url',
+            ],
+        );
+        
         $upPost = Post::where('slug', $slug)->first();
 
         // ?aggiorno lo slug con il nuovo possibile titolo
