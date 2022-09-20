@@ -90,9 +90,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $upData = $request->all();
+        $upPost = Post::where('slug', $slug)->first();
+
+        // ?aggiorno lo slug con il nuovo possibile titolo
+        $upData['slug'] = Str::slug($upData['title']. ' ' . $upPost->id, '-');
+
+        $upPost->update($upData);
+
+        return redirect()->route('admin.posts.show', $upData['slug']);
     }
 
     /**
