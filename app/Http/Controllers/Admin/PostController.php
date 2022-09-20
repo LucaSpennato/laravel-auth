@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin\Post;
 use App\Http\Controllers\Controller;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -26,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -37,7 +39,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newData = $request->all();
+        $newPost = new Post();
+
+        // ? aggirono lo slug
+        $lastPostId = (Post::orderBy('id', 'desc')->first()->id) +1;
+        $newData['slug'] = Str::slug($newData['title'] . '' . $lastPostId, '-');
+        $newData['post_date'] = new DateTime();
+
+
+        $newPost->create($newData);
+
+        return redirect()->route('admin.posts.show', $newData['slug']);
     }
 
     /**
@@ -64,7 +77,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        // 
+        
     }
 
     /**
